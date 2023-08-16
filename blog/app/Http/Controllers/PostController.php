@@ -10,12 +10,13 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts=Post::paginate(3);
+        $posts = Post::paginate(3);
 
         return view('posts.index',[
             'posts' => $posts
         ]);
     }
+    
     public function store(Request $request)
     {
         $this->validate($request, [

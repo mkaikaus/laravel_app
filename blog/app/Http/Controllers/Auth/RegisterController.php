@@ -24,7 +24,6 @@ class RegisterController extends Controller
             'password' => 'required|confirmed|min:8',
         ]);
 
-
        User::create([
         'name' => $request->name,
         'username' => $request->username,
@@ -35,5 +34,6 @@ class RegisterController extends Controller
        auth()->attempt($request->only('email', 'password'));
 
        return redirect()->route('dashboard');
+       
     }
 }
