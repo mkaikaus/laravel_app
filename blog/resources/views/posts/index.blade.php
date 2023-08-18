@@ -32,26 +32,32 @@
                 <p class="mb-4">
                     {{ $post->body }}
                 </p>
-                <div class="flex items-center">
-                    <form action="" method="post" class="mr-1">
-                        @csrf
-                        <button class="btn btn-primary text-blue-500 mr-4" type="submit">Like</button>
-                    </form>
-                    <form action="" method="post" class="mr-1">
-                        @csrf
-                        <button class="btn btn-primary text-blue-500 mr-4" type="submit">Unlike</button>
-                    </form>
-                    <span>{{ $post->likes->count() }} {{ Str::plural('like',$post->likes->count())}} </span>
+                <div class="flex justify-content-between">
+                    <div class="flex justify-content-start">
+                        <form action="" method="post" class="mr-1">
+                            @csrf
+                            <button class="btn btn-primary text-blue-500 mr-3" type="submit">Like</button>
+                        </form>
+                        <form action="" method="post" class="mr-1">
+                            @csrf
+                            <button class="btn btn-primary text-blue-500 mr-3" type="submit">Unlike</button>
+                        </form>
+                        <span class="mt-2">{{ $post->likes->count() }} {{ Str::plural('like',$post->likes->count())}} </span>
+                    </div>
 
+                    @if ($post->user_id == Auth::id())
+                    <div class="flex justify-content-start">
+                        <form action="" method="post" class="mr-1">
+                            @csrf
+                            <a class="btn btn-primary text-blue-500 mr-3" type="submit" href="{{ route('posts.edit',['id' => $post->id]) }}">Update</a>
+                        </form>
+                        <form action="" method="post" class="mr-1">
+                            @csrf
+                            <a class="btn btn-danger text-red-500 mr-3" type="submit" href="{{ route('posts.delete',['id' => $post->id]) }}">Delete</a>
+                        </form>
+                    </div>
+                    @endif
                 </div>
-
-                @if ($post->user_id == Auth::id())
-                <form action="" method="post" class="mr-1">
-                    @csrf
-                    <a class="btn btn-primary text-blue-500 mt-4" type="submit" href="{{ route('posts.edit',['id' => $post->id]) }}">Update</a>
-                </form>
-                @endif
-
             </div>
             @endforeach
 

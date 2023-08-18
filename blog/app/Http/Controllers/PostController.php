@@ -32,6 +32,7 @@ class PostController extends Controller
         // dd($id);
 
         $post = Post::where('id', $id)->first();
+        $posts = Post::paginate(3);
         return view('posts.edit', ['post'=>$post]);
     }
 
@@ -48,6 +49,16 @@ class PostController extends Controller
     
         $posts = Post::paginate(3);
 
+        return view('posts.index',[
+            'posts' => $posts
+        ]);
+    }
+
+    public function destroy($id){
+        $post = Post::where('id', $id)->first();
+        $post->delete();
+
+        $posts = Post::paginate(3);
         return view('posts.index',[
             'posts' => $posts
         ]);
