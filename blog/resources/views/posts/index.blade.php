@@ -48,16 +48,14 @@
                 @if ($post->user_id == Auth::id())
                 <form action="" method="post" class="mr-1">
                     @csrf
-                    <button class="btn btn-primary text-blue-500 mt-4" type="submit">Update</button>
+                    <a class="btn btn-primary text-blue-500 mt-4" type="submit" href="{{ route('posts.edit',['id' => $post->id]) }}">Update</a>
                 </form>
                 @endif
 
             </div>
             @endforeach
 
-
             {{ $posts->links() }}
-
 
             @else
             <p>There are no posts</p>

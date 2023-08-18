@@ -27,4 +27,29 @@ class PostController extends Controller
 
         return back();
     }
+
+    public function edit($id){
+        // dd($id);
+
+        $post = Post::where('id', $id)->first();
+        return view('posts.edit', ['post'=>$post]);
+    }
+
+    public function update(Request $request, $id){
+        //dd($request->all());
+        $this->validate($request, [
+            'body' => 'required'
+        ]);
+    
+        $post = Post::find($id);
+        $post->update([
+            'body' => $request->input('body')
+        ]);
+    
+        $posts = Post::paginate(3);
+
+        return view('posts.index',[
+            'posts' => $posts
+        ]);
+    }
 }
