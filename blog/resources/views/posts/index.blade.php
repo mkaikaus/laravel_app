@@ -53,7 +53,7 @@
                         </form>
                         <form action="" method="post" class="mr-1">
                             @csrf
-                            <a class="btn btn-danger text-red-500 mr-3" type="submit" href="{{ route('posts.delete',['id' => $post->id]) }}">Delete</a>
+                            <a class="btn btn-danger text-red-400 mr-3" type="submit" href="{{ route('posts.delete',['id' => $post->id]) }}">Delete</a>
                         </form>
                     </div>
                     @endif
