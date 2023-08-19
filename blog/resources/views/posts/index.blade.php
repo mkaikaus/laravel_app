@@ -22,7 +22,7 @@
 
             @if ($posts->count())
             @foreach ($posts as $post)
-            <div class="mb-4">
+            <div class="mb-4 mt-4">
                 <a href="" class="font-bold">
                     {{ $post->user->name }}
                 </a>

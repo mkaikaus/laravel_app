@@ -12,55 +12,51 @@ class PostController extends Controller
     {
         $posts = Post::paginate(3);
 
-        return view('posts.index',[
+        return view('posts.index', [
             'posts' => $posts
         ]);
     }
-    
+
     public function store(Request $request)
     {
         $this->validate($request, [
             'body' => 'required'
         ]);
-        
+
         $request->user()->posts()->create($request->only('body'));
 
         return back();
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         // dd($id);
 
         $post = Post::where('id', $id)->first();
         $posts = Post::paginate(3);
-        return view('posts.edit', ['post'=>$post]);
+        return view('posts.edit', ['post' => $post]);
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         //dd($request->all());
         $this->validate($request, [
             'body' => 'required'
         ]);
-    
+
         $post = Post::find($id);
         $post->update([
             'body' => $request->input('body')
         ]);
-    
-        $posts = Post::paginate(3);
 
-        return view('posts.index',[
-            'posts' => $posts
-        ]);
+        return redirect()->route('posts')->with('success', 'Post updated successfully.');
     }
 
-    public function destroy($id){
-        $post = Post::where('id', $id)->first();
+    public function destroy($id)
+    {
+        $post = Post::findOrFail($id);
         $post->delete();
 
-        $posts = Post::paginate(3);
-        return view('posts.index',[
-            'posts' => $posts
-        ]);
+        return redirect()->route('posts')->with('success', 'Post deleted successfully.');
     }
 }

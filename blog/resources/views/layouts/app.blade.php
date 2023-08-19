@@ -13,7 +13,7 @@
 </head>
 <body class="bg-gray-200">
     <nav class="p-6 bg-white flex justify-between">
-        <ul class="flex items-center">
+        <ul class="flex items-center pl-5">
             <li>
                 <a href="/" class="p-3">Home</a>
             </li>
@@ -28,7 +28,7 @@
             @endauth
         </ul>
 
-        <ul class="flex items-center">
+        <ul class="flex items-center pr-5">
         @auth
             <li>
                 <a href="" class="p-3">{{ auth()->user()->name }}</a>
